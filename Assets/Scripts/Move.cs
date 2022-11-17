@@ -21,7 +21,7 @@ public class Move : Action
     public override async Task Execute(World world)
     {
         System.Console.WriteLine(properties.direction);
-        Agent agent = world.agents.Find(x => x.id == properties.agent_id);
+        Agent agent = (Agent)world.objects.Find(x => x.GetComponent<Object>().id == properties.agent_id);
 
         float dx, dz;
 

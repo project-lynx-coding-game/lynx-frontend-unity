@@ -21,8 +21,10 @@ public class RuntimeQuery
 public class World : MonoBehaviour
 {
     public string sendCodeUrl = "https://server.blazej-smorawski.com/send_code";
-    public List<Action> actions = new List<Action>();
-    public List<Agent> agents;
+    public List<GameObject> prefabs;
+    public List<Object> objects;
+ 
+    // -----============== UI ==============-----
     public InputField inputField;
     [TextArea(6, 10)]
     public string defaultCode;
@@ -45,8 +47,12 @@ public class World : MonoBehaviour
             if (log.Contains("Action"))
             {
                 Action action = Deserializer.GetAction(log);
-                actions.Add(action);
                 await action.Execute(this);
+            } 
+            else if (log.Contains("Object"))
+            {
+                objects.Add(Deserializer.GetObject(log, prefabs));
+                //await Task.Delay(100);
             }
         }
     }

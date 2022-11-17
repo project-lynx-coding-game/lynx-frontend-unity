@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 
-public class Agent : MonoBehaviour
+public class Agent : Object
 {
-    public int id;
     public float speed = 1f;
     public float rotationSpeed = 1f;
     public Animator Animator;
