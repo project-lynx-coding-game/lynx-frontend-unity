@@ -18,9 +18,6 @@ public class TemplatePass : ScriptableRenderPass
     RenderTargetIdentifier colorBuffer, temporaryBuffer;
     int temporaryBufferID = Shader.PropertyToID("_TemporaryBuffer");
     
-    // It is good to cache the shader property IDs here.
-    static readonly int BlurStrengthProperty = Shader.PropertyToID("_BlurStrength");
-    
     // The constructor of the pass. Here you can set any material properties that do not need to be updated on a per-frame basis.
     public TemplatePass(TemplateFeature.PassSettings passSettings)
     {

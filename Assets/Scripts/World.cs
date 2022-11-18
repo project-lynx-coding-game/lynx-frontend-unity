@@ -25,7 +25,7 @@ public class World : MonoBehaviour
     public List<Object> objects;
  
     // -----============== UI ==============-----
-    public InputField inputField;
+    public TMPro.TMP_InputField inputField;
     [TextArea(6, 10)]
     public string defaultCode;
 

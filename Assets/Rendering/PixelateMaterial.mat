@@ -52,7 +52,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _PixelRange: 280
-    - _PixelsV: 192
+    - _PixelsV: 384
     - _QueueControl: 1
     - _QueueOffset: 0
     m_Colors: []
