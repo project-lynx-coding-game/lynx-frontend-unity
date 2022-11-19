@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class CreateScene : Action
+public class NextScene : Action
 {
-    public CreateScene(string propertiesJson) : base()
+    public NextScene(string propertiesJson) : base()
     {
 
     }
