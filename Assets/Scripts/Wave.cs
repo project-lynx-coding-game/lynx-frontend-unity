@@ -24,6 +24,7 @@ public class Wave : Action
 
         agent.SetAnimatorBool("waving", true);
 
+        // Move the timer into some helper
         float timer = 0;
         while (timer < 3.0f) {
             timer += Time.deltaTime;
@@ -31,5 +32,12 @@ public class Wave : Action
         }
 
         agent.SetAnimatorBool("waving", false);
+
+        timer = 0;
+        while (timer < 1.0f)
+        {
+            timer += Time.deltaTime;
+            await Task.Yield();
+        }
     }
 }
