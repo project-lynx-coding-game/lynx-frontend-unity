@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.Threading.Tasks;
+using UnityEngine.VFX;
+using UnityEngine.UIElements;
 
 [System.Serializable]
 public class RuntimeResponse
@@ -23,9 +25,15 @@ public class World : MonoBehaviour
     public string sendCodeUrl = "https://server.blazej-smorawski.com/send_code";
     public List<GameObject> prefabs;
     public List<Object> objects;
- 
+
+    // -----============== Running Code ==============-----
+    public Task runCodeTask;
+    bool stop = false;
+    bool stopped = false;
+
     // -----============== UI ==============-----
     public TMPro.TMP_InputField inputField;
+    public VisualEffect loadingEffect;
     [TextArea(6, 10)]
     public string defaultCode;
 
@@ -34,12 +42,30 @@ public class World : MonoBehaviour
         inputField.text = defaultCode;
     }
 
-    public async void RunCode()
+    public async void RunButtonPressed(UnityEngine.UI.Button button)
+    {
+        if(runCodeTask != null && runCodeTask.Status != TaskStatus.RanToCompletion) 
+        {
+            button.interactable = false;
+            stop = true;
+            while(stop == true)
+            {
+                await Task.Yield();
+            }
+            button.interactable = true;
+        }
+
+        runCodeTask = RunCode();
+    }
+
+    public async Task RunCode()
     {
         RuntimeQuery query = new RuntimeQuery();
         query.code = inputField.text.Split('\n');
 
+        loadingEffect.Play();
         string responseString = await SendQuery(JsonUtility.ToJson(query));
+        loadingEffect.Stop();
 
         RuntimeResponse response = JsonUtility.FromJson<RuntimeResponse>(responseString);
         foreach (string log in response.stdout)
@@ -52,7 +78,12 @@ public class World : MonoBehaviour
             else if (log.Contains("Object"))
             {
                 objects.Add(Deserializer.GetObject(log, prefabs));
-                //await Task.Delay(100);
+            }
+
+            if(stop)
+            {
+                stop = false;
+                return;
             }
         }
     }
