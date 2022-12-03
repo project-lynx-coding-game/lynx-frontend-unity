@@ -37,4 +37,9 @@ public class Agent : Object
             await Task.Yield();
         }
     }
+
+    public void SetAnimatorBool(string name, bool value)
+    {
+        Animator.SetBool(name, value);
+    }
 }
