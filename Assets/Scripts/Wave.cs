@@ -39,5 +39,6 @@ public class Wave : Action
             timer += Time.deltaTime;
             await Task.Yield();
         }
+        Debug.Log("Waving Done?");
     }
 }

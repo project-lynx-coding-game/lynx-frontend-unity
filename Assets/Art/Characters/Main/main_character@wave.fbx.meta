@@ -19,7 +19,8 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
       copied configuration does not match position in animation file:\n\t'Main_Character_LeftLeg'
-      : position error = 2.770910 mm\n"
+      : position error = 2.198274 mm\n\t'Main_Character_LeftForeArm' : position error
+      = 1.634880 mm\n"
     animationImportErrors: 
     animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
       might lower retargeting quality:\n\t'Main_Character_Hips' is inbetween humanoid
@@ -28,7 +29,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -41,7 +42,7 @@ ModelImporter:
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 1
-      lastFrame: 59
+      lastFrame: 95
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -64,7 +65,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0.96
+      additiveReferencePoseFrame: 1
     isReadable: 0
   meshes:
     lODScreenPercentages: []
