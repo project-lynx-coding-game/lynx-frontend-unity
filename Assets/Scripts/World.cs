@@ -37,7 +37,7 @@ public class World : MonoBehaviour
 
 
     // -----============== Running Code ==============-----
-    public Task CreateSessionTask;
+    public Task createSessionTask;
     public Task runCodeTask;
     bool stopRunningCode = false;
 
@@ -57,7 +57,7 @@ public class World : MonoBehaviour
     public async void CreateSessionButtonPressed(UnityEngine.UI.Button button)
     {
         button.interactable = false;
-        while (CreateSessionTask != null && CreateSessionTask.Status != TaskStatus.RanToCompletion)
+        while (createSessionTask != null && !createSessionTask.IsCompleted)
         {
             await Task.Yield();
         }
@@ -66,7 +66,7 @@ public class World : MonoBehaviour
         CreateSessionRequest request = new CreateSessionRequest();
         request.username = username;
 
-        CreateSessionTask = RunRequest(JsonUtility.ToJson(request), "/create_session");
+        createSessionTask = RunRequest(JsonUtility.ToJson(request), "/create_session");
     }
 
     public async void RunButtonPressed(UnityEngine.UI.Button button)
