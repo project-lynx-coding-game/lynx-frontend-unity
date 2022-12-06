@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MoveProperties
 {
-    public int agent_id;
+    public int object_id;
     public string direction;
 }
 
@@ -21,7 +21,7 @@ public class Move : Action
     public override async Task Execute(World world)
     {
         System.Console.WriteLine(properties.direction);
-        Agent agent = (Agent)world.objects.Find(x => x.GetComponent<Object>().id == properties.agent_id);
+        Agent agent = (Agent)world.objects.Find(x => x.GetComponent<Object>().id == properties.object_id);
 
         float dx, dz;
 
