@@ -61943,7 +61943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   username: testuser
-  sendCodeUrl: localhost:9000
+  sendCodeUrl: https://server.blazej-smorawski.com
   prefabs:
   - {fileID: 4821601493024767675, guid: 34f88d0fe2837ec45a120a43da02a9b3, type: 3}
   - {fileID: 5771171370426418569, guid: d47ac087dc8fe97418c9a331bec75e04, type: 3}

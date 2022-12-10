@@ -118,7 +118,7 @@ public class World : MonoBehaviour
 
     private async Task<string> SendQuery(string query, string route)
     {
-        var request = new UnityWebRequest(sendCodeUrl+route, "GET");
+        var request = new UnityWebRequest(sendCodeUrl+route, "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(query);
         request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
