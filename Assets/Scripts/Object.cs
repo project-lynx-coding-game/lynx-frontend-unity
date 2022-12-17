@@ -9,6 +9,7 @@ public class ObjectProperties
     public string class_name;
     public int id;
     public string position;
+    public bool to_remove;
 }
 
 public class Object : MonoBehaviour
@@ -30,5 +31,10 @@ public class Object : MonoBehaviour
             0,
             int.Parse(positionStrings[1])
             );
+    }
+
+    public static void DestroyObject(Object objectToDestroy)
+    {
+        Destroy(objectToDestroy.gameObject);
     }
 }

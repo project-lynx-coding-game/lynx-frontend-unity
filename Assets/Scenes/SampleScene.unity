@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -61943,12 +61943,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   username: testuser
-  sendCodeUrl: https://server.blazej-smorawski.com
+  sendCodeUrl: localhost:9000
   prefabs:
   - {fileID: 4821601493024767675, guid: 34f88d0fe2837ec45a120a43da02a9b3, type: 3}
   - {fileID: 5771171370426418569, guid: d47ac087dc8fe97418c9a331bec75e04, type: 3}
   - {fileID: 8256721459830640570, guid: bc48c03a03dee18419599e653a304424, type: 3}
   - {fileID: 8626005779430379835, guid: 08b4462b042de0446b4f73936987690d, type: 3}
+  - {fileID: 3142997300730388648, guid: 779724cecad153b4387fe862fe64a08b, type: 3}
+  - {fileID: 7037683627901679720, guid: 8c2d85209addf36429bc8da3c7a2c499, type: 3}
   objects: []
   inputField: {fileID: 1177833445}
   loadingEffect: {fileID: 431152892}

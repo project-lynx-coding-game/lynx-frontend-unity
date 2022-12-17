@@ -102,7 +102,7 @@ public class World : MonoBehaviour
             {
                 Action action = Deserializer.GetAction(log);
                 await action.Execute(this);
-            } 
+            }
             else if (log.Contains("Object"))
             {
                 objects.Add(Deserializer.GetObject(log, prefabs));

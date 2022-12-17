@@ -32,6 +32,14 @@ static public class Deserializer
 
         ObjectProperties properties = JsonUtility.FromJson<ObjectProperties>(json);
 
+        if (properties.to_remove)
+        {
+
+
+            return null;
+        }
+
+
         /*
          * Prefabs name MUST match `class_name` found in log
          */ 
