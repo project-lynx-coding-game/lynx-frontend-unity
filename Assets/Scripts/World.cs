@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 using System.Threading.Tasks;
 using UnityEngine.VFX;
 using UnityEngine.UIElements;
+using System.Linq;
 
 [System.Serializable]
 public class RuntimeResponse
@@ -44,6 +45,7 @@ public class World : MonoBehaviour
 
     // -----============== UI ==============-----
     public TMPro.TMP_InputField inputField;
+    public TMPro.TMP_InputField mocksField;
     public VisualEffect loadingEffect;
     [TextArea(6, 10)]
     public string defaultCode;
@@ -96,6 +98,10 @@ public class World : MonoBehaviour
         loadingEffect.Stop();
 
         RuntimeResponse response = JsonUtility.FromJson<RuntimeResponse>(responseString);
+
+        // Add mocks to the input
+        string[] mockedLogs = mocksField.text.Split('\n');
+        response.stdout = mockedLogs.Concat(response.stdout).ToArray();
         foreach (string log in response.stdout)
         {
             if (log.Contains("Action"))
