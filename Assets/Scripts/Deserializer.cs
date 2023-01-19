@@ -34,8 +34,6 @@ static public class Deserializer
 
         if (properties.to_remove)
         {
-
-
             return null;
         }
 

@@ -15,7 +15,7 @@ public class ObjectProperties
 public class Object : MonoBehaviour
 {
     public int id;
-
+    public uint size = 1;
     public virtual void Initialize(string properties)
     {
         ObjectProperties instanceProperties = JsonUtility.FromJson<ObjectProperties>(properties);
@@ -27,9 +27,9 @@ public class Object : MonoBehaviour
             .Split(',');
 
         transform.position = new Vector3(
-            int.Parse(positionStrings[0]),
+            int.Parse(positionStrings[0]) + (float)(size - 1) / 2,
             0,
-            int.Parse(positionStrings[1])
+            int.Parse(positionStrings[1]) + (float)(size - 1) / 2
             );
     }
 
