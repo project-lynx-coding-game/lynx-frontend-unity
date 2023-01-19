@@ -120,6 +120,7 @@ public class World : MonoBehaviour
     {
         var request = new UnityWebRequest(sendCodeUrl+route, "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(query);
+        
         request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
@@ -130,6 +131,11 @@ public class World : MonoBehaviour
             await Task.Yield();
         }
 
+		if (request.result != UnityWebRequest.Result.Success) {
+			Debug.Log("Error: " + request.error);
+			return "";
+		}
+        
         Debug.Log("Status Code: " + request.responseCode + "\nBody:\n" + request.downloadHandler.text);
         return request.downloadHandler.text;
     }
