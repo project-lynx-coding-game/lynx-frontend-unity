@@ -35047,7 +35047,7 @@ MonoBehaviour:
   m_text: "{ \"base_class_name\" : \"Object\", \"class_name\" : \"Bear\", \"properties\"
     : {\"id\": -1, \"position\": \"(2,1)\"} }\n{ \"base_class_name\" : \"Action\",
     \"class_name\" : \"Move\", \"properties\" : {\"object_id\": -1, \"direction\":
-    \"DOWN\"} } \u200B"
+    \"SOUTH\"} } \u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c399690e56859744287b7d0dab7e59da, type: 2}
   m_sharedMaterial: {fileID: -2209677979897307283, guid: c399690e56859744287b7d0dab7e59da, type: 2}
@@ -46448,7 +46448,7 @@ MonoBehaviour:
     {"id": -1, "position": "(2,1)"} }
 
     { "base_class_name" : "Action", "class_name"
-    : "Move", "properties" : {"object_id": -1, "direction": "DOWN"} } '
+    : "Move", "properties" : {"object_id": -1, "direction": "SOUTH"} } '
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -62254,7 +62254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   username: testuser2
-  sendCodeUrl: https://server.blazej-smorawski.com
+  sendCodeUrl: http://localhost:9000
   prefabs:
   - {fileID: 4821601493024767675, guid: 34f88d0fe2837ec45a120a43da02a9b3, type: 3}
   - {fileID: 5771171370426418569, guid: d47ac087dc8fe97418c9a331bec75e04, type: 3}

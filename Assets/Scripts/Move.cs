@@ -27,19 +27,19 @@ public class Move : Action
 
         switch(properties.direction)
         {
-            case "UP":
+            case "NORTH":
                 dx = 0;
                 dz = 1;
                 break;
-            case "RIGHT":
+            case "EAST":
                 dx = 1;
                 dz = 0;
                 break;
-            case "DOWN":
+            case "SOUTH":
                 dx = 0;
                 dz= -1;
                 break;
-            case "LEFT":
+            case "WEST":
                 dx = -1;
                 dz = 0;
                 break;
@@ -49,6 +49,8 @@ public class Move : Action
                 break;
         }
 
+        // Object.transform.position already
+        // accounts for Objects size
         Vector3 destination = new Vector3(
             agent.transform.position.x + dx,
             agent.transform.position.y,

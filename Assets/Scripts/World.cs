@@ -107,7 +107,8 @@ public class World : MonoBehaviour
             if (log.Contains("Action"))
             {
                 Action action = Deserializer.GetAction(log);
-                await action.Execute(this);
+                if (action != null)
+                    await action.Execute(this);
             }
             else if (log.Contains("Object"))
             {

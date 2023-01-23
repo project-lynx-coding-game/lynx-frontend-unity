@@ -16,9 +16,21 @@ static public class Deserializer
 
         ActionProperties properties = JsonUtility.FromJson<ActionProperties>(json);
 
-        Type type = Type.GetType(properties.class_name.ToString());
-        Action action = (Action)Activator.CreateInstance(type, propertiesJson);
+        Action action = null;
+
+        try
+        {
+            Type type = Type.GetType(properties.class_name.ToString());
+            Debug.Log(properties.class_name.ToString());
+            action = (Action)Activator.CreateInstance(type, propertiesJson);
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+        }
+
         return action;
+
     }
 
     static public Object GetObject(string json, List<GameObject> prefabs)

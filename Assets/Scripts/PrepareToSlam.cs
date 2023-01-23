@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class PrepareProperties
+public class PrepareToSlamProperties
 {
     public int object_id;
 }
 
-public class Prepare : Action
+public class PrepareToSlam : Action
 {
-    private PrepareProperties properties;
+    private PrepareToSlamProperties properties;
 
-    public Prepare(string propertiesJson) : base()
+    public PrepareToSlam(string propertiesJson) : base()
     {
-        properties = JsonUtility.FromJson<PrepareProperties>(propertiesJson);
+        properties = JsonUtility.FromJson<PrepareToSlamProperties>(propertiesJson);
     }
 
     public override async Task Execute(World world)
