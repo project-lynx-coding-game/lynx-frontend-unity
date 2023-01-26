@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class DealDmg : Action
 {
-    public DealDmg(string properties) { }
+    public DealDmg(string properties) 
+    { 
 
-    public override Task Execute(World world)
+    }
+
+    public override async Task Execute(World world)
     {
-        return Task.CompletedTask;
+        return;
     }
 }
