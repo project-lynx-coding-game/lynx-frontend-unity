@@ -44,6 +44,8 @@ public class World : MonoBehaviour
 
 
     // -----============== UI ==============-----
+    public GameObject logPrefab;
+    public GameObject logsWindow;
     public TMPro.TMP_InputField inputField;
     public TMPro.TMP_InputField mocksField;
     public VisualEffect loadingEffect;
@@ -73,11 +75,11 @@ public class World : MonoBehaviour
 
     public async void RunButtonPressed(UnityEngine.UI.Button button)
     {
-        if(runCodeTask != null && !runCodeTask.IsCompleted) 
+        if (runCodeTask != null && !runCodeTask.IsCompleted)
         {
             button.interactable = false;
             stopRunningCode = true;
-            while(stopRunningCode == true)
+            while (stopRunningCode == true)
             {
                 await Task.Yield();
             }
@@ -115,7 +117,7 @@ public class World : MonoBehaviour
                 objects.Add(Deserializer.GetObject(log, prefabs));
             }
 
-            if(stopRunningCode)
+            if (stopRunningCode)
             {
                 stopRunningCode = false;
                 return;
@@ -125,9 +127,9 @@ public class World : MonoBehaviour
 
     private async Task<string> SendQuery(string query, string route)
     {
-        var request = new UnityWebRequest(sendCodeUrl+route, "POST");
+        var request = new UnityWebRequest(sendCodeUrl + route, "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(query);
-        
+
         request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
@@ -138,12 +140,30 @@ public class World : MonoBehaviour
             await Task.Yield();
         }
 
-		if (request.result != UnityWebRequest.Result.Success) {
-			Debug.Log("Error: " + request.error);
-			return "";
-		}
-        
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log("Error: " + request.error);
+            return "";
+        }
+
         Debug.Log("Status Code: " + request.responseCode + "\nBody:\n" + request.downloadHandler.text);
         return request.downloadHandler.text;
+    }
+
+    public void AddLog(string type, string message)
+    {
+        GameObject newLog = GameObject.Instantiate(logPrefab);
+        newLog.transform.SetParent(logsWindow.transform, true);
+
+        // Fix scale
+        newLog.transform.localScale = Vector3.one;
+
+        TMPro.TextMeshProUGUI logText = newLog.GetComponent<TMPro.TextMeshProUGUI>();
+        logText.text = message;
+
+        if (type == "error")
+        {
+            logText.color = Color.red;
+        }
     }
 }
