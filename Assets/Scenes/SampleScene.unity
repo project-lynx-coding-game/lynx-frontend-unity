@@ -62317,8 +62317,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11e80fd3edb2a3d4ca071520629150fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  username: testuser2
-  sendCodeUrl: http://localhost:9000
+  username: testuser
+  sendCodeUrl: https://server.blazej-smorawski.com
   prefabs:
   - {fileID: 4821601493024767675, guid: 34f88d0fe2837ec45a120a43da02a9b3, type: 3}
   - {fileID: 5771171370426418569, guid: d47ac087dc8fe97418c9a331bec75e04, type: 3}
@@ -62327,7 +62327,10 @@ MonoBehaviour:
   - {fileID: 3142997300730388648, guid: 779724cecad153b4387fe862fe64a08b, type: 3}
   - {fileID: 7037683627901679720, guid: 8c2d85209addf36429bc8da3c7a2c499, type: 3}
   - {fileID: 1071194012678599359, guid: 80aff3ef017a65c4e830b02e455cb9fe, type: 3}
+  - {fileID: 8626005779430379835, guid: a2f83dcc2c85b8847a441545da7a8725, type: 3}
   objects: []
+  canvas: {fileID: 657759581}
+  dmgLogPrefab: {fileID: 6356549967898133338, guid: 0ccffb523a10cd64abd395d129d43d97, type: 3}
   logPrefab: {fileID: 6880272486337059028, guid: b95622b21e8425441bd152946500b5df, type: 3}
   logsWindow: {fileID: 913433763}
   inputField: {fileID: 1177833445}

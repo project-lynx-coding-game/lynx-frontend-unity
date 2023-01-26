@@ -44,6 +44,8 @@ public class World : MonoBehaviour
 
 
     // -----============== UI ==============-----
+    public Canvas canvas;
+    public GameObject dmgLogPrefab;
     public GameObject logPrefab;
     public GameObject logsWindow;
     public TMPro.TMP_InputField inputField;
@@ -165,5 +167,19 @@ public class World : MonoBehaviour
         {
             logText.color = Color.red;
         }
+    }
+
+    public void SpawnDmgLog(Vector2 position, int dmg)
+    {
+        GameObject newLog = GameObject.Instantiate(dmgLogPrefab);
+        newLog.transform.SetParent(canvas.transform, true);
+
+        // Fix scale
+        newLog.transform.localScale = Vector3.one;
+
+        newLog.GetComponent<RectTransform>().anchoredPosition = position;
+
+        TMPro.TextMeshProUGUI logText = newLog.GetComponent<TMPro.TextMeshProUGUI>();
+        logText.text = dmg.ToString();
     }
 }

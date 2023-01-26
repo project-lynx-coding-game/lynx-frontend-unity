@@ -3,15 +3,29 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
+public class DealDmgProperties
+{
+    public int object_id;
+    public int dmg;
+}
+
 public class DealDmg : Action
 {
-    public DealDmg(string properties) 
-    { 
+    private DealDmgProperties properties;
 
+    public DealDmg(string propertiesJson)
+    {
+        properties = JsonUtility.FromJson<DealDmgProperties>(propertiesJson);
     }
 
     public override async Task Execute(World world)
     {
-        return;
+        Object objectTakingDmg = world.objects.Find(x => x.GetComponent<Object>().id == properties.object_id);
+
+        Vector2 screenPosition = Camera.main.WorldToScreenPoint(objectTakingDmg.transform.position);
+
+        Vector2 finalPosition = new Vector2(screenPosition.x / world.canvas.scaleFactor, screenPosition.y / world.canvas.scaleFactor);
+
+        world.SpawnDmgLog(finalPosition, properties.dmg);
     }
 }

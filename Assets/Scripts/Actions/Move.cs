@@ -23,39 +23,11 @@ public class Move : Action
         System.Console.WriteLine(properties.direction);
         Agent agent = (Agent)world.objects.Find(x => x.GetComponent<Object>().id == properties.object_id);
 
-        float dx, dz;
-
-        switch(properties.direction)
-        {
-            case "NORTH":
-                dx = 0;
-                dz = 1;
-                break;
-            case "EAST":
-                dx = 1;
-                dz = 0;
-                break;
-            case "SOUTH":
-                dx = 0;
-                dz= -1;
-                break;
-            case "WEST":
-                dx = -1;
-                dz = 0;
-                break;
-            default:
-                dx = 0;
-                dz = 0;
-                break;
-        }
+        Vector3 direction = ActionUtils.StringToDirection(properties.direction);
 
         // Object.transform.position already
         // accounts for Objects size
-        Vector3 destination = new Vector3(
-            agent.transform.position.x + dx,
-            agent.transform.position.y,
-            agent.transform.position.z + dz
-            );
+        Vector3 destination = agent.transform.position + direction;
 
         //await Task.Delay(200);
         await agent.LookInDirection(destination - agent.transform.position);

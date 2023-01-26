@@ -15,5 +15,36 @@ public static class ActionUtils
             await Task.Yield();
         }
     }
+
+    public static Vector3 StringToDirection(string str)
+    {
+        float dx, dz;
+
+        switch (str)
+        {
+            case "NORTH":
+                dx = 0;
+                dz = 1;
+                break;
+            case "EAST":
+                dx = 1;
+                dz = 0;
+                break;
+            case "SOUTH":
+                dx = 0;
+                dz = -1;
+                break;
+            case "WEST":
+                dx = -1;
+                dz = 0;
+                break;
+            default:
+                dx = 0;
+                dz = 0;
+                break;
+        }
+
+        return new Vector3(dx, 0, dz);
+    }
     
 }
