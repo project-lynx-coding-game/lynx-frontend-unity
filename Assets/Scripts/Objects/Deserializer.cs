@@ -1,68 +1,42 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json.Linq;
 
 static public class Deserializer
 {
-    static public Action GetAction(string json)
+    /*-- 
+     * objects: [
+     *      {
+     *          type: "miœ",
+     *          args: "{x:5, y:3, hp:100}"
+     *      },
+     *      {
+     *           type: "floor",
+     *           args: "{x:4, y:5}"
+     *      }
+     *  ]
+     * --*/
+    static public List<Object> GetObjects(string json)
     {
-        // Parse properties into a separate JSON dict
-        // { "base": "blabla", "type": "blabla", properties: {"abc": 1, "cbd": 2}} => {"abc": 1, "cbd": 2}
-        string propertiesStartMark = "\"properties\" : {";
-        int propertiesStart = json.IndexOf(propertiesStartMark) + propertiesStartMark.Length;
-        int propertiesEnd = json.IndexOf('}', propertiesStart);
-        string propertiesJson = "{ " + json.Substring(propertiesStart, propertiesEnd - propertiesStart) + " }";
-
-        ActionProperties properties = JsonUtility.FromJson<ActionProperties>(json);
-
-        Action action = null;
-
-        try
+        JObject objectsJson = JObject.Parse(json);
+        List<Object> newObjects = new List<Object>();
+        foreach (JObject objectJson in objectsJson.Children<JObject>())
         {
-            Type type = Type.GetType(properties.class_name.ToString());
-            Debug.Log(properties.class_name.ToString());
-            action = (Action)Activator.CreateInstance(type, propertiesJson);
-        }
-        catch (Exception e)
-        {
-            Debug.LogException(e);
-        }
-
-        return action;
-
-    }
-
-    static public Object GetObject(string json, List<GameObject> prefabs)
-    {
-        // Parse properties into a separate JSON dict
-        // { "base": "blabla", "type": "blabla", properties: {"abc": 1, "cbd": 2}} => {"abc": 1, "cbd": 2}
-        string propertiesStartMark = "\"properties\" : {";
-        int propertiesStart = json.IndexOf(propertiesStartMark) + propertiesStartMark.Length;
-        int propertiesEnd = json.IndexOf('}', propertiesStart);
-        string propertiesJson = "{ " + json.Substring(propertiesStart, propertiesEnd - propertiesStart) + " }";
-
-        ObjectProperties properties = JsonUtility.FromJson<ObjectProperties>(json);
-
-        if (properties.to_remove)
-        {
-            return null;
-        }
-
-
-        /*
-         * Prefabs name MUST match `class_name` found in log
-         */ 
-        foreach(GameObject prefab in prefabs)
-        {
-            if (prefab.name == properties.class_name)
+            String argsString = objectJson["args"].ToString();
+            String typeString = objectJson["type"].ToString();
+            try 
             {
-                GameObject instance = GameObject.Instantiate(prefab);
-                Object instanceObject = instance.GetComponent<Object>();
-                instanceObject.Initialize(propertiesJson);
-                return instanceObject;
+                Type type = Type.GetType(typeString);
+                Object newObject = (Object)JsonUtility.FromJson(argsString, type);
+                newObjects.Add(newObject);
+                Debug.Log("[INFO] Added object of type: " + typeString);
+            }
+            catch (Exception e)
+            {
+                Debug.Log("[ERROR] Unknown type error: " + e);
             }
         }
-        return null;
-    }
+        return newObjects;
+    }  
 }
