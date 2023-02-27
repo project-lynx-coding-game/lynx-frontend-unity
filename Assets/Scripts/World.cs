@@ -12,8 +12,7 @@ using System.Linq;
 [System.Serializable]
 public class RuntimeResponse
 {
-    public string[] stdout;
-    public string[] stderr;
+    public string entities;
 }
 
 public class CreateSessionRequest
@@ -100,30 +99,30 @@ public class World : MonoBehaviour
         loadingEffect.Play();
         string responseString = await SendQuery(request, route);
         loadingEffect.Stop();
+        List<Entity> entities = Deserializer.GetEntities(responseString);
 
-        RuntimeResponse response = JsonUtility.FromJson<RuntimeResponse>(responseString);
-
-        // Add mocks to the input
-        string[] mockedLogs = mocksField.text.Split('\n');
-        response.stdout = mockedLogs.Concat(response.stdout).ToArray();
-        foreach (string log in response.stdout)
+        foreach (Entity entity in entities)
         {
-            if (log.Contains("Action"))
+            if (entity == null)
             {
-                Action action = Deserializer.GetAction(log);
-                if (action != null)
-                    await action.Execute(this);
-            }
-            else if (log.Contains("Object"))
-            {
-                objects.Add(Deserializer.GetObject(log, prefabs));
+                continue;
             }
 
-            if (stopRunningCode)
+            if (entity is Action)
             {
-                stopRunningCode = false;
-                return;
+                await ((Action) entity).Execute(this);
             }
+
+            if (entity is Object)
+            {
+                objects.Add((Object) entity);
+            }
+        }
+
+        if (stopRunningCode)
+        {
+            stopRunningCode = false;
+            return;
         }
     }
 

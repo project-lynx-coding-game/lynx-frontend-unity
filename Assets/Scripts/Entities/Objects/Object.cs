@@ -12,7 +12,7 @@ public class ObjectProperties
     public bool to_remove;
 }
 
-public class Object : MonoBehaviour
+public class Object : MonoBehaviour, Entity
 {
     public int id;
     public uint size = 1;

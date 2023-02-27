@@ -8,7 +8,7 @@ public class ActionProperties
     public string class_name;
 }
 
-public abstract class Action
+public abstract class Action : Entity
 {
     public abstract Task Execute(World world);
 }
