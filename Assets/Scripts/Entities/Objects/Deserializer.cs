@@ -11,8 +11,8 @@ static public class Deserializer
         List<Entity> entities = new List<Entity>();
         foreach (JObject objectJson in objectsJson["entities"].Children<JObject>())
         {
-            String argsString = objectJson["args"].ToString();
             String typeString = objectJson["type"].ToString();
+            String argsString = objectJson["attributes"].ToString();
             try 
             {
                 Type type = Type.GetType(typeString);

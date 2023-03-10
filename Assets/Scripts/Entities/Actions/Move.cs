@@ -11,7 +11,7 @@ public class MoveProperties
 
 public class Move : Action
 {
-    private MoveProperties properties;
+    protected MoveProperties properties { get; }
 
     public Move(string propertiesJson) : base()
     {
